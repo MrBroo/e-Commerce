@@ -14,16 +14,16 @@ function Home() {
         <div className="home__row">
           <Product
           title="Samsung LC49RG90SSUXEN 49' Curved LED Gaming Monitor"
-          image="https://images-na.ssl-images-amazon.com/images/I/715wqqe7XAL._AC_325_B01,204,203,200_.jpg"
+          image="https://images-na.ssl-images-amazon.com/images/I/51Zymoq7UnL._SX_325_B01,204,203,200_.jpg"
           rating={3}
           price={19.99} />
            <Product
-          title="The lean startup"
+          title="Samsung LC49RG90SSUXEN 49' Curved LED Gaming Monitor"
           image="https://images-na.ssl-images-amazon.com/images/I/51Zymoq7UnL._SX_325_B01,204,203,200_.jpg"
           rating={5}
           price={19.99} />
            <Product
-          title="The lean startup"
+          title="Samsung LC49RG90SSUXEN 49' Curved LED Gaming Monitor"
           image="https://images-na.ssl-images-amazon.com/images/I/51Zymoq7UnL._SX_325_B01,204,203,200_.jpg"
           rating={5}
           price={19.99} />
@@ -31,12 +31,12 @@ function Home() {
 
         <div className="home__row">
         <Product
-          title="The lean startup"
+          title="Samsung LC49RG90SSUXEN 49' Curved LED Gaming Monitor"
           image="https://images-na.ssl-images-amazon.com/images/I/51Zymoq7UnL._SX_325_B01,204,203,200_.jpg"
           rating={5}
           price={19.99} />
            <Product
-          title="The lean startup"
+          title="Samsung LC49RG90SSUXEN 49' Curved LED Gaming Monitor"
           image="https://images-na.ssl-images-amazon.com/images/I/51Zymoq7UnL._SX_325_B01,204,203,200_.jpg"
           rating={5}
           price={19.99} />
@@ -44,7 +44,7 @@ function Home() {
 
         <div className="home__row">
         <Product
-          title="The lean startup"
+          title="Samsung LC49RG90SSUXEN 49' Curved LED Gaming Monitor"
           image="https://images-na.ssl-images-amazon.com/images/I/51Zymoq7UnL._SX_325_B01,204,203,200_.jpg"
           rating={5}
           price={19.99} />
