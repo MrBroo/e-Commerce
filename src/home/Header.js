@@ -2,7 +2,10 @@ import React from "react";
 import "../main/Header.css";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
+import { useStateValue } from "./StateProvider";
+
 function Header() {
+  const [{ basket }, dispatch] = useStateValue();
   return (
     <div className="header">
       <a href="/">
@@ -31,7 +34,9 @@ function Header() {
         <a href="/checkout">
           <div className="header__optionBasket">
             <ShoppingBasketIcon />
-            <span className="header__optionLineTwo header_basketCount">0</span>
+            <span className="header__optionLineTwo header_basketCount">
+              {basket?.length}
+            </span>
           </div>
         </a>
       </div>

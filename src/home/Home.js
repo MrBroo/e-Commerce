@@ -13,41 +13,52 @@ function Home() {
 
         <div className="home__row">
           <Product
-          title="Samsung LC49RG90SSUXEN 49' Curved LED Gaming Monitor"
-          image="https://images-na.ssl-images-amazon.com/images/I/51Zymoq7UnL._SX_325_B01,204,203,200_.jpg"
-          rating={3}
-          price={19.99} />
-           <Product
-          title="Samsung LC49RG90SSUXEN 49' Curved LED Gaming Monitor"
-          image="https://images-na.ssl-images-amazon.com/images/I/51Zymoq7UnL._SX_325_B01,204,203,200_.jpg"
-          rating={5}
-          price={19.99} />
-           <Product
-          title="Samsung LC49RG90SSUXEN 49' Curved LED Gaming Monitor"
-          image="https://images-na.ssl-images-amazon.com/images/I/51Zymoq7UnL._SX_325_B01,204,203,200_.jpg"
-          rating={5}
-          price={19.99} />
+            id={1}
+            title="Samsung LC49RG90SSUXEN 49' Curved LED Gaming Monitor"
+            image="https://images-na.ssl-images-amazon.com/images/I/51Zymoq7UnL._SX_325_B01,204,203,200_.jpg"
+            rating={3}
+            price={19.99}
+          />
+          <Product
+            id={2}
+            title="Samsung LC49RG90SSUXEN 49' Curved LED Gaming Monitor"
+            image="https://images-na.ssl-images-amazon.com/images/I/51Zymoq7UnL._SX_325_B01,204,203,200_.jpg"
+            rating={5}
+            price={19.99}
+          />
+          <Product
+            id={3}
+            title="Samsung LC49RG90SSUXEN 49' Curved LED Gaming Monitor"
+            image="https://images-na.ssl-images-amazon.com/images/I/51Zymoq7UnL._SX_325_B01,204,203,200_.jpg"
+            rating={5}
+            price={19.99}
+          />
         </div>
 
         <div className="home__row">
-        <Product
-          title="Samsung LC49RG90SSUXEN 49' Curved LED Gaming Monitor"
-          image="https://images-na.ssl-images-amazon.com/images/I/51Zymoq7UnL._SX_325_B01,204,203,200_.jpg"
-          rating={5}
-          price={19.99} />
-           <Product
-          title="Samsung LC49RG90SSUXEN 49' Curved LED Gaming Monitor"
-          image="https://images-na.ssl-images-amazon.com/images/I/51Zymoq7UnL._SX_325_B01,204,203,200_.jpg"
-          rating={5}
-          price={19.99} />
+          <Product
+            id={4}
+            title="Samsung LC49RG90SSUXEN 49' Curved LED Gaming Monitor"
+            image="https://images-na.ssl-images-amazon.com/images/I/51Zymoq7UnL._SX_325_B01,204,203,200_.jpg"
+            rating={5}
+            price={19.99}
+          />
+          <Product
+            title="Samsung LC49RG90SSUXEN 49' Curved LED Gaming Monitor"
+            image="https://images-na.ssl-images-amazon.com/images/I/51Zymoq7UnL._SX_325_B01,204,203,200_.jpg"
+            rating={5}
+            price={19.99}
+          />
         </div>
 
         <div className="home__row">
-        <Product
-          title="Samsung LC49RG90SSUXEN 49' Curved LED Gaming Monitor"
-          image="https://images-na.ssl-images-amazon.com/images/I/51Zymoq7UnL._SX_325_B01,204,203,200_.jpg"
-          rating={5}
-          price={19.99} />
+          <Product
+            id={5}
+            title="Samsung LC49RG90SSUXEN 49' Curved LED Gaming Monitor"
+            image="https://images-na.ssl-images-amazon.com/images/I/51Zymoq7UnL._SX_325_B01,204,203,200_.jpg"
+            rating={5}
+            price={19.99}
+          />
         </div>
       </div>
     </div>
