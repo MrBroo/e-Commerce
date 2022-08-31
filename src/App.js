@@ -6,13 +6,13 @@ import Check from "./home/Check";
 
 function App() {
   return (
-    <div>
-      <Header />
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="checkout" element={<Check />} />
-    </Routes>
-    </div>
+      <>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/checkout" element={<Check />} />
+        </Routes>
+      </>
   );
 }
 

@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./main/index.css";
 import App from "./App";
 import { initialState } from "./home/reducer";
-import reducer  from "./home/reducer";
+import reducer from "./home/reducer";
 import { BrowserRouter } from "react-router-dom";
 import { StateProvider } from "./home/StateProvider";
 
