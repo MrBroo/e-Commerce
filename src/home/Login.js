@@ -1,10 +1,24 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import "../main/Login.css";
+import { auth } from "../firebase";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const signIn = (e) => {
+    e.preventDefault();
+  };
+
+  const register = (e) => {
+    e.preventDefault();
+
+    auth.createUserWidthEmailandPassword(email, password)
+    .then((auth) =>{
+      console.log(auth);
+    })
+    .catch(error => alert(error.message))
+  };
   return (
     <div className="login">
       <Link to="/">
@@ -32,7 +46,13 @@ function Login() {
             onChange={(e) => setPassword(e.target.value)}
           />
 
-          <button className="login__signInButton">Sign in</button>
+          <button
+            className="login__signInButton"
+            type="button"
+            onClick={(e) => signIn()}
+          >
+            Sign in
+          </button>
 
           <p>
             By signing-in you agree to Amazon's Conditions of Use & Sale. Please
