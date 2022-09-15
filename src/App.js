@@ -26,8 +26,9 @@ function App() {
           user: null,
         });
       }
-    }, []);
-  });
+    });
+  }, []);
+
   return (
     <>
       <Header />
