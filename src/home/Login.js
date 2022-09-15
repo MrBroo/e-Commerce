@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import "../main/Login.css";
 import { auth } from "../firebase";
@@ -6,18 +7,29 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const navigate = useNavigate();
+
   const signIn = (e) => {
     e.preventDefault();
+    auth
+      .signInWithEmailAndPassword(email, password)
+      .then((auth) => {
+        navigate("/");
+      })
+      .catch((error) => alert(error.message));
   };
 
   const register = (e) => {
     e.preventDefault();
 
-    auth.createUserWidthEmailandPassword(email, password)
-    .then((auth) =>{
-      console.log(auth);
-    })
-    .catch(error => alert(error.message))
+    auth
+      .createUserWithEmailAndPassword(email, password)
+      .then((auth) => {
+        if (auth) {
+          navigate("/");
+        }
+      })
+      .catch((error) => alert(error.message));
   };
   return (
     <div className="login">
@@ -49,7 +61,7 @@ function Login() {
           <button
             className="login__signInButton"
             type="button"
-            onClick={(e) => signIn()}
+            onClick={(e) => signIn(e)}
           >
             Sign in
           </button>
@@ -60,7 +72,10 @@ function Login() {
             Ads
           </p>
 
-          <button className="login__registerButton">
+          <button
+            onClick={(e) => register(e)}
+            className="login__registerButton"
+          >
             Create your Amazon account
           </button>
         </form>
