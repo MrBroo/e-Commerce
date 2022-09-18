@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../main/Payment.css";
 import { useStateValue } from "./StateProvider";
 import CheckoutProduct from "./CheckoutProduct";
@@ -6,13 +6,13 @@ import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 import CurrencyFormat from "react-currency-format";
 import { getBasketTotal } from "./reducer";
-import axios from "axios";
+import axios from "./axios";
 
 function Payment() {
   const [{ basket, user }, dispatch] = useStateValue();
-
+  const navigate = useNavigate();
   const stripe = useStripe();
-  const element = useElements();
+  const elements = useElements();
 
   const [succeeded, setSucceeded] = useState(false);
   const [processing, setProcessing] = useState("");
@@ -23,17 +23,38 @@ function Payment() {
   useEffect(() => {
     const getClientSecret = async () => {
       const response = await axios({
-        methode: "post",
-        url: "/payment/create?total=${getBasketTotal(basket) * 100}",
+        method: "post",
+        url: `/payments/create?total=${getBasketTotal(basket) * 100}`,
       });
+      setClientSecret(response.data.clientSecret);
     };
 
     getClientSecret();
   }, [basket]);
+
+  console.log("THE SECRET IS >>>>", clientSecret);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     setProcessing(true);
-    const payload = await stripe;
+
+    const payload = await stripe
+      .confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: elements.getElement(CardElement),
+        },
+      })
+      .then(({ paymentIntent }) => {
+        setSucceeded(true);
+        setError(null);
+        setProcessing(false);
+
+        dispatch({
+          type: "EMPTY_BASKET",
+        });
+
+        navigate.replace("/orders");
+      });
   };
 
   const handleChange = (event) => {
@@ -78,14 +99,17 @@ function Payment() {
             <h3>Payment Method</h3>
           </div>
           <div className="payment__details">
-            <form onSubmit={handleSubmit}>
-              <CardElement onChange={handleChange} />
+            <form onSubmit={(e) => handleSubmit(e)}>
+              <CardElement onChange={(e) => handleChange(e)} />
 
               <div className="payment__priceContainer">
                 <CurrencyFormat
                   renderText={(value) => (
                     <>
-                      <h3>Order Total: (value)</h3>
+                      <h3>Order total {value}</h3>
+                      <small className="subtotal__gift">
+                        <input type="checkbox" /> This order contains a gift
+                      </small>
                     </>
                   )}
                   decimalScale={2}
@@ -94,7 +118,11 @@ function Payment() {
                   thousandSeparator={true}
                   prefix={"$"}
                 />
-                <button disabled={processing || disabled || succeeded}>
+                <button
+                  disabled={
+                    processing || disabled || succeeded || clientSecret === null
+                  }
+                >
                   <span>{processing ? <p>Processing</p> : "Buy Now"}</span>
                 </button>
               </div>
