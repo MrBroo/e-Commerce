@@ -31,12 +31,12 @@ function Login() {
       })
       .catch((error) => alert(error.message));
   };
-  return (
+  return (  
     <div className="login">
       <Link to="/">
         <img
           className="login__logo"
-          src="http://pngimg.com/uploads/amazon/amazon_PNG11.png"
+          src="https://pngimg.com/uploads/amazon/amazon_PNG11.png"
         />
       </Link>
 

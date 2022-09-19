@@ -1,7 +1,7 @@
 import "../main/CheckoutProduct.css";
 import { useStateValue } from "./StateProvider";
 
-function CheckoutProduct({ id, image, title, price, rating }) {
+function CheckoutProduct({ id, image, title, price, rating, hideButton }) {
   const [{ basket }, dispatch] = useStateValue();
 
   const removeFromBasket = (e) => {
@@ -24,10 +24,14 @@ function CheckoutProduct({ id, image, title, price, rating }) {
           {Array(rating)
             .fill()
             .map((_, i) => (
-              <p>⭐</p>
+              <p key={i}>⭐</p>
             ))}
         </div>
-        <button onClick={(e) => removeFromBasket(e)}>Remove from basket</button>
+        {!hideButton && (
+          <button onClick={(e) => removeFromBasket(e)}>
+            Remove from basket
+          </button>
+        )}
       </div>
     </div>
   );

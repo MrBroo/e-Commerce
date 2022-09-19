@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import CurrencyFormat from "react-currency-format";
 import { getBasketTotal } from "./reducer";
 import axios from "./axios";
+import { db } from "../firebase";
 
 function Payment() {
   const [{ basket, user }, dispatch] = useStateValue();
@@ -18,7 +19,7 @@ function Payment() {
   const [processing, setProcessing] = useState("");
   const [error, setError] = useState(null);
   const [disabled, setDisabled] = useState(true);
-  const [clientSecret, setClientSecret] = useState(true);
+  const [clientSecret, setClientSecret] = useState("");
 
   useEffect(() => {
     const getClientSecret = async () => {
@@ -45,6 +46,15 @@ function Payment() {
         },
       })
       .then(({ paymentIntent }) => {
+        db.collection("users")
+          .doc(user?.uid)
+          .collection("orders")
+          .doc(paymentIntent.id)
+          .set({
+            basket: basket,
+            amount: paymentIntent,
+            created: paymentIntent.created,
+          });
         setSucceeded(true);
         setError(null);
         setProcessing(false);
@@ -53,7 +63,7 @@ function Payment() {
           type: "EMPTY_BASKET",
         });
 
-        navigate.replace("/orders");
+        navigate("/orders");
       });
   };
 
@@ -83,8 +93,9 @@ function Payment() {
             <h3>Review items and delivery</h3>
           </div>
           <div className="payment__item">
-            {basket.map((item) => (
+            {basket.map((item, i) => (
               <CheckoutProduct
+                key={i}
                 id={item.id}
                 title={item.title}
                 image={item.image}
@@ -106,7 +117,7 @@ function Payment() {
                 <CurrencyFormat
                   renderText={(value) => (
                     <>
-                      <h3>Order total {value}</h3>
+                      <h4>Order total {value}</h4>
                       <small className="subtotal__gift">
                         <input type="checkbox" /> This order contains a gift
                       </small>
@@ -118,11 +129,7 @@ function Payment() {
                   thousandSeparator={true}
                   prefix={"$"}
                 />
-                <button
-                  disabled={
-                    processing || disabled || succeeded || clientSecret === null
-                  }
-                >
+                <button disabled={processing || disabled || succeeded}>
                   <span>{processing ? <p>Processing</p> : "Buy Now"}</span>
                 </button>
               </div>

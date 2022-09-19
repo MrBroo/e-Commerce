@@ -12,18 +12,25 @@ const stripe = require("stripe")(
 const app = express();
 
 // - Middlewares
-app.use(cors({ origin: true }));
+// app.use(cors({ origin: true }));
 app.use(express.json());
+
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Headers", "*");
+  next();
+});
 
 // - API routes
 app.get("/", (request, response) => response.status(200).send("hello world"));
+
 app.post("/payments/create", async (request, response) => {
   const total = request.query.total;
 
   console.log("Payment request recieved BOOM!!! for this amount >>", total);
 
   const paymentIntent = await stripe.paymentIntents.create({
-    amount: total,
+    amount: parseInt(total),
     currency: "usd",
   });
 
@@ -33,19 +40,6 @@ app.post("/payments/create", async (request, response) => {
   });
 });
 
-// - Listen commad
 exports.api = functions.https.onRequest(app);
-
-// var http = require("http");
-
-// var server = http.createServer(function (req, res) {
-//   res.end("test");
-// });
-
-// server.on("listening", function () {
-//   console.log("ok, server is running");
-// });
-
-// server.listen(80);
 
 // http://localhost:5001/e-clone-56597/us-central1/api
